@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Service Query</title>
+<script>
+  // Function to make a POST request to the web service
+  function postData() {
+    // Get the input value
+    var userInput = document.getElementById('userInput').value;
+
+    // Construct the request object
+    var data = { input: userInput };
+    var url = 'YOUR_WEB_SERVICE_URL'; // Replace with your web service URL
+
+    // Make the POST request using fetch API
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Display the output in the output area
+      document.getElementById('output').innerText = JSON.stringify(data, null, 2);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  }
+</script>
+</head>
+<body>
+  <h1>Web Service Query</h1>
+  <label for="userInput">Input:</label>
+  <input type="text" id="userInput" placeholder="Enter input...">
+  <button onclick="postData()">Query</button>
+  <div>
+    <h2>Output:</h2>
+    <pre id="output"></pre>
+  </div>
+</body>
+</html>
